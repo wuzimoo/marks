@@ -1,25 +1,26 @@
-import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import { createRouter, createWebHistory } from 'vue-router';
+import LoginView from '@/views/LoginView.vue';
+import MarksView from '@/views/MarksView.vue'; // Подставьте правильный путь к вашему компоненту MarksView
 
-const routes: Array<RouteRecordRaw> = [
+const routes = [
   {
     path: '/',
-    name: 'home',
-    component: HomeView
+    name: 'Login',
+    component: LoginView
   },
   {
-    path: '/about',
-    name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
+    path: '/users/mark/',
+    name: 'Marks',
+    component: MarksView,
+    meta: {
+      requiresAuth: true // Добавьте этот мета-атрибут, если требуется аутентификация для доступа к этому маршруту
+    }
   }
-]
+];
 
 const router = createRouter({
-  history: createWebHashHistory(),
+  history: createWebHistory(),
   routes
-})
+});
 
-export default router
+export default router;
